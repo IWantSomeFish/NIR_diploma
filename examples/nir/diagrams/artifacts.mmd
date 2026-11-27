@@ -1,0 +1,16 @@
+flowchart TD
+    OUT["output/"] --> A["Автор А/"]
+    A --> WORK_A["Произведение А/"]
+    A --> WORK_B["Произведение Б/"]
+    WORK_A --> CHAR_A["characters.json<br/>Персонажи"]
+    WORK_A --> LOC_A["locations.json<br/>Окружение (локации)"]
+    WORK_A --> SET_A["setting.json<br/>Сеттинг"]
+    WORK_B --> CHAR_B["characters.json<br/>Персонажи"]
+    WORK_B --> LOC_B["locations.json<br/>Окружение (локации)"]
+    WORK_B --> SET_B["setting.json<br/>Сеттинг"]
+    OUT --> B["Другие авторы/<br/>…"]
+
+    classDef folder fill:#edf3f7,stroke:#486579,color:#172b3a;
+    classDef artifact fill:#f6f4e9,stroke:#847746,color:#29250f;
+    class OUT,A,WORK_A,WORK_B,B folder;
+    class CHAR_A,LOC_A,SET_A,CHAR_B,LOC_B,SET_B artifact;

@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Reader as Пользователь
+    participant App as Программа
+    participant API as Локальный сервер Ollama
+    participant Model as Языковая модель
+    participant FS as Файловая система
+
+    Reader->>App: Текст и метаданные произведения
+    App->>App: Формирование запроса RCTF
+    App->>API: POST /api/generate (prompt, format: json)
+    API->>Model: Запрос на генерацию
+    Model-->>API: Ответ в формате JSON
+    API-->>App: Ответ модели
+    App->>App: Разбор JSON и проверка схемы
+    alt Ответ прошёл проверку
+        App->>FS: Сохранить результат в output/...
+        FS-->>App: Подтверждение сохранения
+        App-->>Reader: Структурированные сведения
+    else Ошибка формата или ответа API
+        App->>FS: Записать сведения об ошибке
+        App-->>Reader: Сообщение об ошибке обработки
+    end
